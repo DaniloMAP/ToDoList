@@ -8,7 +8,7 @@ class TodoListPage extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(18),
           child: TextField(
             decoration: InputDecoration(),
           ),
