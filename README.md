@@ -1,49 +1,54 @@
-# Todo List App
+# Meu Aplicativo TODO List
 
-Este é um aplicativo de lista de tarefas desenvolvido em Flutter, que permite que os usuários cadastrem e gerenciem suas tarefas diárias.
+Este é um aplicativo TODO List desenvolvido em Flutter, que permite ao usuário adicionar, visualizar e remover tarefas pendentes.
 
 ## Funcionalidades
 
-- Adicionar uma nova tarefa: Digite o nome da tarefa no campo de texto e pressione o botão de adição para criar uma nova tarefa.
+- Adicionar uma nova tarefa.
+- Visualizar a lista de tarefas pendentes.
+- Remover tarefas da lista.
 
-- Remover uma tarefa: Deslize a tarefa para a esquerda para revelar o botão de exclusão. Toque no botão de exclusão para remover a tarefa da lista.
+## Tecnologias Utilizadas
 
-- Desfazer exclusão: Após remover uma tarefa, uma mensagem de Snackbar será exibida com a opção de desfazer a ação de exclusão.
+- Flutter: Framework de desenvolvimento de aplicativos móveis multiplataforma, permitindo criar apps nativos para Android e iOS a partir de um único código-fonte.
+- Dart: Linguagem de programação utilizada pelo Flutter, com foco em simplicidade e agilidade no desenvolvimento de aplicativos.
+- shared_preferences: Pacote utilizado para persistência de dados locais, armazenando as tarefas em formato JSON no dispositivo do usuário.
 
-- Limpar todas as tarefas: Toque no botão "Limpar tudo" para remover todas as tarefas da lista. Uma janela de confirmação será exibida antes da ação ser realizada.
+## Persistência de Dados
 
-## Como usar
+Neste aplicativo, a persistência de dados é realizada utilizando o pacote `shared_preferences`, que é uma forma simples de armazenar dados chave-valor no dispositivo. Com essa abordagem, as tarefas são armazenadas localmente no dispositivo do usuário mesmo após o aplicativo ser encerrado ou o dispositivo reiniciado.
 
-1. Adicione uma tarefa: Digite o nome da tarefa no campo de texto e pressione o botão de adição.
+O código responsável pela persistência de dados está no arquivo `todo_repository.dart`, onde a classe `TodoRepository` gerencia as operações de leitura e gravação dos dados utilizando o `SharedPreferences`.
 
-2. Remova uma tarefa: Deslize a tarefa para a esquerda e toque no ícone de lixeira para remover a tarefa.
+```dart
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo_list/models/todo.dart';
 
-3. Desfazer exclusão: Se você acidentalmente remover uma tarefa, use o botão "Desfazer" na mensagem de Snackbar para restaurá-la.
+const todoListKey = 'todo_list';
 
-4. Limpar todas as tarefas: Toque no botão "Limpar tudo" para remover todas as tarefas da lista.
+class TodoRepository {
+  late SharedPreferences sharedPreferences;
 
-## Tecnologias utilizadas
+  Future<List<Todo>> getTodoList() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    final String jsonString = sharedPreferences.getString(todoListKey) ?? '[]';
+    final List jsonDecoded = json.decode(jsonString) as List;
+    return jsonDecoded.map((e) => Todo.fromJson(e)).toList();
+  }
 
-- Flutter: Framework de desenvolvimento de aplicativos móveis multiplataforma, usado para criar a interface do usuário e a lógica do aplicativo.
+  void SaveTodoList(List<Todo> todos) {
+    final String jsonString = json.encode(todos);
+    sharedPreferences.setString(todoListKey, jsonString);
+  }
+}
+```
 
-- Firebase: Plataforma de desenvolvimento de aplicativos móveis do Google, utilizada para autenticação de usuários e armazenamento de dados.
+## Executando o Aplicativo
 
-- SQLite: Biblioteca de banco de dados embutido, utilizada para armazenar as tarefas localmente no dispositivo do usuário.
-
-## Como executar o aplicativo
-
-1. Certifique-se de ter o Flutter instalado e configurado em seu ambiente de desenvolvimento.
-
-2. Clone este repositório para sua máquina local.
-
-3. Abra o projeto no Visual Studio Code ou outro editor de código de sua preferência.
-
-4. Certifique-se de que todas as dependências do projeto estão instaladas executando o comando `flutter pub get` no terminal.
-
-5. Conecte um dispositivo ou emulador Android/iOS ao computador.
-
-6. Execute o comando `flutter run` no terminal para iniciar o aplicativo no dispositivo/emulador conectado.
+Para executar o aplicativo, é necessário ter o ambiente de desenvolvimento Flutter configurado. Após clonar este repositório, abra o projeto no Visual Studio Code (ou outra IDE de sua preferência) e execute o comando `flutter run` no terminal para rodar o aplicativo em um emulador ou dispositivo físico.
 
 ## Licença
 
-Este aplicativo está sob a Licença MIT. Consulte o arquivo [LICENSE](LICENSE) para obter mais detalhes.
+Este projeto está sob a licença MIT. Consulte o arquivo `LICENSE` para obter mais detalhes.
+
