@@ -172,8 +172,8 @@ class _TodoListPageState extends State<TodoListPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Limpar TUDO?'),
-        content: Text('Você tem certeza que deseja apagar todas as tarefas?'),
+        title: Text('Limpar tudo?'),
+        content: Text('Você tem certeza que deseja apagar todas suas tarefas?'),
         actions: [
           TextButton(
             onPressed: () {
