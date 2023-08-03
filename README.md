@@ -46,9 +46,32 @@ class TodoRepository {
 
 ## Executando o Aplicativo
 
-Para executar o aplicativo, é necessário ter o ambiente de desenvolvimento Flutter configurado. Após clonar este repositório, abra o projeto no Visual Studio Code (ou outra IDE de sua preferência) e execute o comando `flutter run` no terminal para rodar o aplicativo em um emulador ou dispositivo físico.
+Para utilizar o aplicativo de Lista de Tarefas (Todo List) em seu ambiente de desenvolvimento, siga os passos abaixo:
+
+1. Certifique-se de ter o Flutter instalado em seu sistema. Caso ainda não tenha, siga as instruções em [flutter.dev](https://flutter.dev/docs/get-started/install) para instalar o Flutter e configurar o ambiente.
+
+2. Clone este repositório para o seu computador utilizando o comando abaixo ou baixe o projeto como arquivo zip:
+
+   ```bash
+   git clone https://github.com/SEU_USUARIO_GITHUB/todo_list.git
+   ```
+
+3. Abra o projeto no Visual Studio Code ou em seu editor de preferência.
+
+4. Certifique-se de ter as dependências do projeto instaladas. No terminal, navegue até o diretório do projeto e execute o seguinte comando:
+
+   ```bash
+   flutter pub get
+   ```
+
+5. Agora você pode executar o aplicativo em um emulador ou dispositivo físico Android ou iOS. No terminal, execute o seguinte comando:
+
+   ```bash
+   flutter run
+   ```
+
+6. O aplicativo será compilado e instalado em seu dispositivo. Agora você pode interagir com o aplicativo de Lista de Tarefas e adicionar, remover e limpar tarefas pendentes.
 
 ## Licença
-
-Este projeto está sob a licença MIT. Consulte o arquivo `LICENSE` para obter mais detalhes.
+Este projeto está sob a licença MIT. Consulte o arquivo LICENSE para obter mais detalhes.
 
